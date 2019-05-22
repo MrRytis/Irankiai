@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Bid]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Card] NVARCHAR(50) NOT NULL, 
+    [Date] DATE NOT NULL
+)
