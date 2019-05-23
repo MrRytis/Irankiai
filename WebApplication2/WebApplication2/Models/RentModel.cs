@@ -14,7 +14,7 @@ namespace WebApplication2.Models
         public DateTime EndDate { get; set; }
         public string Status { get; set; }
         public string Comments { get; set; }
-        public InvoiceModel Invoice { get; set; }
-        public ItemModel Item { get; set; }
+        public virtual InvoiceModel Invoice { get; set; }
+        public virtual ItemModel Item { get; set; }
     }
 }
