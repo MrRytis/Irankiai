@@ -65,6 +65,7 @@
     <Build Include="dbo\Tables\Auction.sql" />
     <Build Include="dbo\Tables\Bid.sql" />
     <Build Include="dbo\Tables\Advert.sql" />
+    <Build Include="dbo\Tables\Rent.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MVCDB.refactorlog" />
