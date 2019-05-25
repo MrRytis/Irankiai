@@ -10,30 +10,60 @@ namespace WebApplication2.Controllers
 {
     public class RentController : Controller
     {
-        private RentContext db = new RentContext();
-        List<RentModel> data = new List<RentModel>()
-        {
-            new RentModel() {Id=1, EndDate=Convert.ToDateTime("2015/11/23"), StartDate=Convert.ToDateTime("2015/11/23"), Status="In process", Comments="In perfect condition", Invoice=new InvoiceModel() { Id = 1, Amount = 12.25, Date = Convert.ToDateTime("2018/11/23"), Status = "Unpaid" }, Item = new ItemModel() { Id = 1, Description = null, Image = null, Name = "Sony XM3", Price = 2.25 } }
-        };
+        private DBcontext db = new DBcontext();
 
         // GET: Rent
         public ActionResult RentList()
         {
-            //Get list data
             return View(db.Rents.ToList());
         }
 
         public ActionResult DeclineRent(int id)
         {
-            //remove items from list
+            var Rent = db.Rents.Find(id);
+            db.Rents.Remove(Rent);
+            db.SaveChanges();
             return RedirectToAction("RentList");
         }
 
         public ActionResult Rent()
         {
-            List<string> selection = new List<string>() { "a", "b", "c" };
+            var items = db.Items.ToList();
+            List<string> selection = new List<string>();
+            foreach (var item in items)
+            {
+                selection.Add(item.Name);
+            }
+            
             ViewData["selection"] = selection;
-           
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Rent(RentModel rent)
+        {
+            if(ModelState.IsValid)
+            {
+                var it = Request["Items"];
+                var item = db.Items.Where(x => x.Name == it).SingleOrDefault();
+
+                InvoiceModel invoice = new InvoiceModel();
+                invoice.Status = "Unpaid";
+                invoice.Amount = item.Price;
+                invoice.Date = DateTime.Today;
+                invoice.CVC = 100;
+
+
+                rent.Status = "something";
+                rent.Invoice = invoice;
+                rent.Item = item;
+                rent.Comments = item.Description;
+
+                db.Invoices.Add(invoice);
+                db.Rents.Add(rent);
+                db.SaveChanges();
+                return RedirectToAction("RentList");
+            }
             return View();
         }
     }

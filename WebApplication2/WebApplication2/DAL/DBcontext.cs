@@ -8,10 +8,11 @@ using WebApplication2.Models;
 
 namespace WebApplication2.DAL
 {
-    public class RentContext: DbContext
+    public class DBcontext: DbContext
     {
-        public RentContext(): base("RentContext")
+        public DBcontext() : base("NewContext")
         {
+            Database.SetInitializer<DBcontext>(new CreateDatabaseIfNotExists<DBcontext>());
         }
 
         public DbSet<InvoiceModel> Invoices { get; set; }

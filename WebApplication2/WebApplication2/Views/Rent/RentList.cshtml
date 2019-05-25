@@ -58,26 +58,31 @@
                     @Html.DisplayFor(modelItem => item.Invoice.Status)
                 </td>
                 <td>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Cancel Rent</button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="myModal" role="dialog">
-                        <div class="modal-dialog">
+                    @if (item.StartDate > DateTime.Now)
+                    {
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Cancel Rent</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Are you sure you want to cancel rent?</h4>
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Are you sure you want to cancel rent?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        @Html.ActionLink("Yes", "DeclineRent", new { id = item.Id }, new { @class = "btn btn-default" })
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    @Html.ActionLink("Yes", "DeclineRent", new { id = item.Id }, new { @class="btn btn-default" })
-                                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>*@
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                </div>
+
                             </div>
-
                         </div>
-                    </div>
-                    @Html.ActionLink("Pay for rent", "InvoiceForm", "Invoice", null, new { @class="btn btn-info"})
+                    }
+                    @if (item.Invoice.Status != "Paid")
+                    {
+                        @Html.ActionLink("Pay for rent", "InvoiceForm", "Invoice", new { id = item.Invoice.Id }, new { @class = "btn btn-info" });
+                    }
                 </td>
             </tr>
         }
