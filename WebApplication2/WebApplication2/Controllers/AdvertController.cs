@@ -1,34 +1,32 @@
-﻿using DataLibrary.Models;
+﻿using DataLibrary.DataAccess;
+using DataLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication2.DAL;
 using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
     public class AdvertController : Controller
     {
+        private DBcontext db = new DBcontext();
 
-
-
-        List<AdvertModel> advertlist = new List<AdvertModel>() {
-                    new AdvertModel(){Id=4, Valid_from=Convert.ToDateTime("11/23/2010"), Valid_to = Convert.ToDateTime("11/23/2019"),Title = "HEHE",  Status = "On", Description = "aaaa", Price = 12 },
-                    new AdvertModel(){Id=4,Valid_from=Convert.ToDateTime("11/23/2011"), Valid_to = Convert.ToDateTime("11/23/2019"),Title = "HEHE", Status = "On", Description = "aaaa", Price = 12 },
-                    new AdvertModel(){Id=4,Valid_from=Convert.ToDateTime("11/23/2012"), Valid_to = Convert.ToDateTime("11/23/2019"),Title = "HEHE", Status = "On", Description = "aaaa", Price = 12 }
-                    //new AuctionModel(){ Id=4, Date=Convert.ToDateTime("10/23/2010"), End_Date = Convert.ToDateTime("11/23/2019"), Status = "On", Description = "aaaa", Price = 12 },
-                    //new AuctionModel(){ Id=5, Date=Convert.ToDateTime("09/17/2010"), End_Date = Convert.ToDateTime("11/23/2019"), Status = "On", Description = "aaaa", Price = 12 },
-                    //new AuctionModel(){ Id=6, Date=Convert.ToDateTime("12/23/2010"), End_Date = Convert.ToDateTime("11/23/2019"), Status = "On", Description = "aaaa", Price = 12 },
-                    //new AuctionModel(){ Id=7, Date=Convert.ToDateTime("10/13/2010"), End_Date = Convert.ToDateTime("11/23/2019"), Status = "On", Description = "aaaa", Price = 12 }
-                    
-                };
 
         public ActionResult Edit(int Id)
         {
             //Get the student from studentList sample collection for demo purpose.
             //Get the student from the database in the real application
-            var std = advertlist.Where(s => s.Id == Id).FirstOrDefault();
+            var std = db.Adverts.ToList().Where(s => s.Id == Id).FirstOrDefault();
+
+            return View(std);
+        }
+
+        public ActionResult Create()
+        {
+            var std = new AdvertModel();
 
             return View(std);
         }
@@ -36,14 +34,56 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Edit(AdvertModel std)
         {
-            //write code to update student 
+            //TODO: write code to update advert
+            if (ModelState.IsValid)
+            {
+                var advert = db.Adverts.ToList().Where(s => s.Id == std.Id).FirstOrDefault();
+                advert.Description = std.Description;
+                advert.Price = std.Price;
+                advert.Status = std.Status;
+                advert.Title = std.Title;
+                advert.Valid_from = std.Valid_from;
+                advert.Valid_to = std.Valid_to;
 
-            return RedirectToAction("Index");
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
         }
-        
+
+        [HttpPost]
+        public ActionResult Create(AdvertModel std)
+        {
+            //TODO: write code to update advert
+            if (ModelState.IsValid)
+            {
+
+                AdvertModel data = new AdvertModel
+                {
+                    Valid_from = std.Valid_from,
+                    Valid_to = std.Valid_to,
+                    Title = std.Title,
+                    Price = std.Price,
+                    Status = std.Status,
+                    Description = std.Description
+                };
+
+                string sql = @"insert into dbo.Advert (Valid_from, Valid_to, Title, Price, Status, Description) values (@Valid_from, @Valid_to, @Title, @Price, @Status, @Description);";
+
+                SqlDataAccess.SaveData(sql, data);
+
+                return RedirectToAction("Index", "Home");
+
+            }
+
+            return View();
+        }
+
         public ActionResult ViewAdvertList()
         {
-            return View(advertlist);
+            return View(db.Adverts.ToList());
         }
 
         //[HttpGet]
@@ -75,8 +115,7 @@ namespace WebApplication2.Controllers
 
         public ActionResult Details(int Id)
         {
-
-            var std = advertlist.Where(s => s.Id == Id).FirstOrDefault();
+            var std = db.Adverts.ToList().Where(s => s.Id == Id).FirstOrDefault();
 
             return View(std);
         }

@@ -10,7 +10,7 @@ namespace WebApplication2.DAL
 {
     public class DBcontext: DbContext
     {
-        public DBcontext() : base("NewContext")
+        public DBcontext() : base("MVCDB")
         {
             Database.SetInitializer<DBcontext>(new CreateDatabaseIfNotExists<DBcontext>());
         }
@@ -18,6 +18,9 @@ namespace WebApplication2.DAL
         public DbSet<InvoiceModel> Invoices { get; set; }
         public DbSet<ItemModel> Items { get; set; }
         public DbSet<RentModel> Rents { get; set; }
+        public DbSet<BidModel> Bids { get; set; }
+        public DbSet<AuctionModel> Auctions { get; set; }
+        public DbSet<AdvertModel> Adverts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -35,7 +35,7 @@ namespace WebApplication2.Controllers
             {
                 int recordsCreated = CreateBid(model.Card,
                     model.Date);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             return View();
