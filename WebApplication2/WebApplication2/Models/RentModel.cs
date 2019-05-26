@@ -11,15 +11,16 @@ namespace WebApplication2.Models
     public class RentModel
     {
         public int Id { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "Requerd field.")]
         public DateTime StartDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Requerd field.")]
         public DateTime EndDate { get; set; }
         public string Status { get; set; }
         public string Comments { get; set; }
         public virtual InvoiceModel Invoice { get; set; }
         public virtual ItemModel Item { get; set; }
+        public virtual TransportRequestModel Transport { get; set; }
     }
 }

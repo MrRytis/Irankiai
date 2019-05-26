@@ -154,6 +154,14 @@
     <Compile Include="Migrations\201905261557438_DBcontext1.Designer.cs">
       <DependentUpon>201905261557438_DBcontext1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905261704586_DBcontext2.cs" />
+    <Compile Include="Migrations\201905261704586_DBcontext2.Designer.cs">
+      <DependentUpon>201905261704586_DBcontext2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905261807507_DBcontext3.cs" />
+    <Compile Include="Migrations\201905261807507_DBcontext3.Designer.cs">
+      <DependentUpon>201905261807507_DBcontext3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdvertModel.cs" />
     <Compile Include="Models\AuctionModel.cs" />
@@ -254,6 +262,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905261557438_DBcontext1.resx">
       <DependentUpon>201905261557438_DBcontext1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905261704586_DBcontext2.resx">
+      <DependentUpon>201905261704586_DBcontext2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905261807507_DBcontext3.resx">
+      <DependentUpon>201905261807507_DBcontext3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
