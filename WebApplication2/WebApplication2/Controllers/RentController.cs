@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication2.DAL;
 using WebApplication2.Models;
+using MvcFlashMessages;
 
 namespace WebApplication2.Controllers
 {
@@ -23,6 +24,7 @@ namespace WebApplication2.Controllers
             var Rent = db.Rents.Find(id);
             db.Rents.Remove(Rent);
             db.SaveChanges();
+            this.Flash("success ", "Removed!");
             return RedirectToAction("RentList");
         }
 
