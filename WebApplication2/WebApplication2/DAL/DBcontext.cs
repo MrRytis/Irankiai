@@ -21,6 +21,7 @@ namespace WebApplication2.DAL
         public DbSet<BidModel> Bids { get; set; }
         public DbSet<AuctionModel> Auctions { get; set; }
         public DbSet<AdvertModel> Adverts { get; set; }
+        public DbSet<TransportRequestModel> TransportRequests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

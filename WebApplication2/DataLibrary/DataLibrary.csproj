@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="DataAccess\SqlDataAccess.cs" />
     <Compile Include="Models\AdvertModel.cs" />
+    <Compile Include="Models\TransportRequest.cs" />
     <Compile Include="Models\AuctionModel.cs" />
     <Compile Include="Models\BidModel.cs" />
     <Compile Include="Models\Processor.cs" />

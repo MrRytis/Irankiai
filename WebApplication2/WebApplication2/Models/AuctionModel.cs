@@ -11,6 +11,7 @@ namespace WebApplication2.Models
     public class AuctionModel
     {
         public int Id { get; set; }
+        [Display(Name = "Date:")]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
         [Display(Name = "End date")]

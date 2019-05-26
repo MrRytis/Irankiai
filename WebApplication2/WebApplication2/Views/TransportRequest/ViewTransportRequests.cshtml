@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebApplication2.Models.TransportRequestModel>
+
+@{
+    ViewBag.Title = "ViewAuctions";
+}
+
+<h2>View Transport Requests</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Pickup_Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Delivery_Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pickup_Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Delivery_Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.ActionLink("Approve", "ApproveRequest", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -34,7 +34,6 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Edit(AdvertModel std)
         {
-            //TODO: write code to update advert
             if (ModelState.IsValid)
             {
                 var advert = db.Adverts.ToList().Where(s => s.Id == std.Id).FirstOrDefault();
@@ -56,7 +55,6 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Create(AdvertModel std)
         {
-            //TODO: write code to update advert
             if (ModelState.IsValid)
             {
 
