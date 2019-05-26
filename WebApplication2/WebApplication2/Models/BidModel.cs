@@ -12,10 +12,10 @@ namespace WebApplication2.Models
     {
         public int Id { get; set; }
 
-        [Required( ErrorMessage = "Privaloma suvesti kortelės kodą.")]
-        [StringLength(6, ErrorMessage = "Kortelės kodas turi būt 6 skaitmenų.")]
+        [Required( ErrorMessage = "Required field.")]
+        [StringLength(6, ErrorMessage = "Code must be 6 symbols long.")]
         public string Card { get; set; }
-        [Compare("Card", ErrorMessage = "Kortelių kodai neatitinka")]
+        [Compare("Card", ErrorMessage = "Codes are not equal.")]
         public string CardConfirm { get; set; }
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }

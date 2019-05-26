@@ -131,6 +131,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\TransportRequestController.cs" />
     <Compile Include="Controllers\AdvertController.cs" />
     <Compile Include="Controllers\AuctionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -149,6 +150,10 @@
     <Compile Include="Migrations\201905261331357_DBcontext.Designer.cs">
       <DependentUpon>201905261331357_DBcontext.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905261557438_DBcontext1.cs" />
+    <Compile Include="Migrations\201905261557438_DBcontext1.Designer.cs">
+      <DependentUpon>201905261557438_DBcontext1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdvertModel.cs" />
     <Compile Include="Models\AuctionModel.cs" />
@@ -156,6 +161,7 @@
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Models\RentModel.cs" />
+    <Compile Include="Models\TransportRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -194,14 +200,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\AuctionSignUp.cshtml" />
-    <Content Include="Views\Home\ViewAuctions.cshtml" />
+    <Content Include="Views\Home\AuctionSignUp_deprecated.cshtml" />
+    <Content Include="Views\Home\ViewAuctions_deprecated.cshtml" />
     <Content Include="Views\Home\SubmitBid.cshtml" />
     <Content Include="Views\Payment\PayForBid.cshtml" />
     <Content Include="Views\Auction\Edit.cshtml" />
-    <Content Include="Views\Auction\Index.cshtml" />
+    <Content Include="Views\Auction\Index_deprecated.cshtml" />
     <Content Include="Views\Payment\BidModel.cshtml" />
-    <Content Include="Views\Home\ViewAuction.cshtml" />
+    <Content Include="Views\Home\ViewAuction_deprecated.cshtml" />
     <Content Include="Views\Advert\ViewAdvertList.cshtml" />
     <Content Include="Views\Advert\Details.cshtml" />
     <Content Include="Views\Rent\RentList.cshtml" />
@@ -209,6 +215,10 @@
     <Content Include="Views\Rent\Rent.cshtml" />
     <Content Include="Views\Advert\Edit.cshtml" />
     <Content Include="Views\Advert\Create.cshtml" />
+    <Content Include="Views\Auction\ViewAuctions.cshtml" />
+    <Content Include="Views\Auction\Create.cshtml" />
+    <Content Include="Views\Auction\Details.cshtml" />
+    <Content Include="Views\TransportRequest\ViewTransportRequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -241,6 +251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905261331357_DBcontext.resx">
       <DependentUpon>201905261331357_DBcontext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905261557438_DBcontext1.resx">
+      <DependentUpon>201905261557438_DBcontext1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
