@@ -24,7 +24,7 @@ namespace WebApplication2.Controllers
             var Rent = db.Rents.Find(id);
             db.Rents.Remove(Rent);
             db.SaveChanges();
-            this.Flash("success ", "Removed!");
+            this.Flash("success", "Removed!");
             return RedirectToAction("RentList");
         }
 
@@ -44,6 +44,14 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Rent(RentModel rent)
         {
+            var items = db.Items.ToList();
+            List<string> selection = new List<string>();
+            foreach (var item in items)
+            {
+                selection.Add(item.Name);
+            }
+            ViewData["selection"] = selection;
+
             if (ModelState.IsValid)
             {
                 if (Request["Items"] != null || rent.StartDate > rent.EndDate)
@@ -53,7 +61,7 @@ namespace WebApplication2.Controllers
 
                     InvoiceModel invoice = new InvoiceModel();
                     invoice.Status = "Unpaid";
-                    invoice.Amount = item.Price;
+                    invoice.Amount = item.Price * (rent.EndDate - rent.StartDate).TotalDays;
                     invoice.Date = DateTime.Today;
                     invoice.CVC = 100;
                     invoice.CardOwner = "-";
@@ -79,10 +87,13 @@ namespace WebApplication2.Controllers
                     db.Invoices.Add(invoice);
                     db.Rents.Add(rent);
                     db.SaveChanges();
+                    this.Flash("success", "Added!");
                     return RedirectToAction("RentList");
                 }
+                this.Flash("error", "Failed!");
                 return View();
             }
+            this.Flash("error", "Failed!");
             return View();
         }
     }

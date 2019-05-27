@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication2.DAL;
 using WebApplication2.Models;
+using MvcFlashMessages;
 
 namespace WebApplication2.Controllers
 {
@@ -30,8 +31,10 @@ namespace WebApplication2.Controllers
                 invoice.CardOwner = newInvoice.CardOwner;
                 invoice.CVC = newInvoice.CVC;
                 db.SaveChangesAsync();
+                this.Flash("success", "Added!");
                 return RedirectToAction("RentList", "Rent");
             }
+            this.Flash("error", "Failed!");
             return View();
         }
     }
