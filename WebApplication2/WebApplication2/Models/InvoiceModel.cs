@@ -18,12 +18,12 @@ namespace WebApplication2.Models
         public string Status { get; set; }
 
         [Required(ErrorMessage = "Requerd field.")]
-        public int Card { get; set; }
+        public Nullable<int> Card { get; set; }
 
         [Required(ErrorMessage = "Requerd field.")]
         public string CardOwner { get; set; }
 
         [Range(99, 999)]
-        public int CVC { get; set; }
+        public Nullable<int> CVC { get; set; }
     }
 }
