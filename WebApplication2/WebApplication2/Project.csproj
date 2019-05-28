@@ -226,6 +226,7 @@
     <Content Include="Views\Auction\Details.cshtml" />
     <Content Include="Views\TransportRequest\ViewTransportRequests.cshtml" />
     <Content Include="Views\TransportRequest\Routes.cshtml" />
+    <Content Include="Views\Auction\EditPrice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -36,6 +36,35 @@ namespace WebApplication2.Controllers
             return View(db.Auctions.ToList());
         }
 
+
+        public ActionResult EditPrice(int Id)
+        {
+            //Get the student from studentList sample collection for demo purpose.
+            //Get the student from the database in the real application
+            var std = db.Auctions.ToList().Where(s => s.Id == Id).FirstOrDefault();
+
+            return View(std);
+        }
+
+        [HttpPost]
+        public ActionResult EditPrice(AuctionModel std)
+        {
+            var auction = db.Auctions.ToList().Where(s => s.Id == std.Id).FirstOrDefault();
+            if (ModelState.IsValid && std.Price > auction.Price)
+            {
+                
+                auction.Price = std.Price;
+
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
+
+
         public ActionResult Edit(int Id)
         {
             //Get the student from studentList sample collection for demo purpose.

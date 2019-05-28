@@ -47,8 +47,8 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Submit bid", "SubmitBid", new { id = item.Price }) |
-            @Html.ActionLink("Pay", "Payment/PayForBid", new { id = item.Price }) |
+            <a href="/Auction/EditPrice/@Html.DisplayFor(modelItem => item.Id)">Submit bid</a> |
+            <a href="/Payment/PayForBid/@Html.DisplayFor(modelItem => item.Id)">Pay for bid</a> |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             @Html.ActionLink("Edit", "Edit", new { id = item.Id })
         </td>
