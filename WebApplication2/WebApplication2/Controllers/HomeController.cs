@@ -15,6 +15,7 @@ namespace WebApplication2.Controllers
     {
         public ActionResult Index()
         {
+            MailController.SendMail();
             return View();
         }
 
@@ -56,6 +57,5 @@ namespace WebApplication2.Controllers
 
             return View(auctions);
         }
-
     }
 }
