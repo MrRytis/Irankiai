@@ -79,6 +79,7 @@ namespace WebApplication2.Controllers
                     string tID = null;
                     string itID = null;
                     string inID = null;
+                    string inID2 = null;
 
                     itID = item.Id.ToString();
 
@@ -91,8 +92,22 @@ namespace WebApplication2.Controllers
                         //db.TransportRequests.Add(transport);
                         rent.Transport = transport;
 
-                        string sql = @"insert into dbo.Transport (Pickup_Time, Delivery_Time, Status, Notes) values (@Pickup_Time, @Delivery_Time, @Status, @Notes);";
+                        string sql = @"insert into dbo.Transport (Pickup_Time, Delivery_Time, Status, Notes) values (@Pickup_Time, @Delivery_Time, @Status, @Notes); SELECT MAX(ID) FROM dbo.Transport;";
                         tID = (SqlDataAccess.SaveData(sql, transport)).ToString();
+                        tID = db.TransportRequests.OrderByDescending(u => u.Id).FirstOrDefault().Id.ToString();
+
+
+                        InvoiceModel invoice2 = new InvoiceModel();
+                        invoice2.Status = "Unpaid";
+                        invoice2.Amount = item.Price * (rent.EndDate - rent.StartDate).TotalDays;
+                        invoice2.Date = DateTime.Today;
+                        invoice2.CVC = 100;
+                        invoice2.CardOwner = "-";
+                        invoice2.Card = 0;
+
+                        string sqles = @"insert into dbo.Invoice (Amount, Date, Status, Card, CardOwner, CVC) values (@Amount, @Date, @Status, @Card, @CardOwner, @CVC); SELECT MAX(ID) FROM dbo.Invoice;";
+                        inID2 = (SqlDataAccess.SaveData(sqles, invoice2)).ToString();
+                        inID2 = db.Invoices.OrderByDescending(u => u.Id).FirstOrDefault().Id.ToString();
                     }
 
                     rent.Status = "In rent";
@@ -100,25 +115,24 @@ namespace WebApplication2.Controllers
                     rent.Item = item;
                     rent.Comments = item.Description;
 
-                    string sqle = @"insert into dbo.Invoice (Amount, Date, Status, Card, CardOwner, CVC) values (@Amount, @Date, @Status, @Card, @CardOwner, @CVC);";
+                    string sqle = @"insert into dbo.Invoice (Amount, Date, Status, Card, CardOwner, CVC) values (@Amount, @Date, @Status, @Card, @CardOwner, @CVC); SELECT MAX(ID) FROM dbo.Invoice;";
                     inID = (SqlDataAccess.SaveData(sqle, invoice)).ToString();
+                    inID = db.Invoices.OrderByDescending(u => u.Id).FirstOrDefault().Id.ToString();
 
                     if (checkBox != null)
                     {
-                        sqle = @"insert into dbo.Rent (StartDate, EndDate, Comments, Transport_Id, Item_Id, Invoice_Id) values (@StartDate, @EndDate, @Comments, "+tID+", "+itID+", "+inID+");";
+                        sqle = @"insert into dbo.Rent (StartDate, EndDate, Comments, Transport_Id, Item_Id, Invoice_Id, InvoiceT_Id) values (@StartDate, @EndDate, @Comments, " + tID+", "+itID+", "+inID+", "+inID2+");";
                         SqlDataAccess.SaveData(sqle, rent);
                     }
                     else
                     {
-                        sqle = @"insert into dbo.Rent (StartDate, EndDate, Comments, Item_Id, Invoice_Id) values (@StartDate, @EndDate, @Comments, "+itID+", "+inID+");";
+                        sqle = @"insert into dbo.Rent (StartDate, EndDate, Comments, Item_Id, Invoice_Id) values (@StartDate, @EndDate, @Comments, " + itID+", "+inID+");";
                         SqlDataAccess.SaveData(sqle, rent);
                     }
                     
 
                     //db.Invoices.Add(invoice);
-                    //db.Rents.Add(rent);
-
-                    db.SaveChanges();
+                    //db.Rents.Add(rent
                     this.Flash("success", "Added!");
                     return RedirectToAction("RentList");
                 }

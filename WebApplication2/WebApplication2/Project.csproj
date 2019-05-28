@@ -149,9 +149,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905281238088_DBcontext.cs" />
-    <Compile Include="Migrations\201905281238088_DBcontext.Designer.cs">
-      <DependentUpon>201905281238088_DBcontext.cs</DependentUpon>
+    <Compile Include="Migrations\201905281904326_DBContext.cs" />
+    <Compile Include="Migrations\201905281904326_DBContext.Designer.cs">
+      <DependentUpon>201905281904326_DBContext.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdvertModel.cs" />
@@ -225,6 +225,7 @@
     <Content Include="Views\Auction\Create.cshtml" />
     <Content Include="Views\Auction\Details.cshtml" />
     <Content Include="Views\TransportRequest\ViewTransportRequests.cshtml" />
+    <Content Include="Views\TransportRequest\Routes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -253,8 +254,8 @@
     <Folder Include="Views\Mail\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905281238088_DBcontext.resx">
-      <DependentUpon>201905281238088_DBcontext.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905281904326_DBContext.resx">
+      <DependentUpon>201905281904326_DBContext.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

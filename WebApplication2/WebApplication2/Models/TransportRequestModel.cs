@@ -20,7 +20,8 @@ namespace WebApplication2.Models
         [StringLength(10), MinLength(2)]
         [Required(ErrorMessage = "Required field.")]
         public string Status { get; set; }
+        [Display(Name = "Route from -> to:")]
         public string Notes { get; set; }
-        
+
     }
 }

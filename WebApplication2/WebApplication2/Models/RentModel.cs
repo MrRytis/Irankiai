@@ -20,6 +20,7 @@ namespace WebApplication2.Models
         public string Status { get; set; }
         public string Comments { get; set; }
         public virtual InvoiceModel Invoice { get; set; }
+        public virtual InvoiceModel InvoiceT { get; set; }
         public virtual ItemModel Item { get; set; }
         public virtual TransportRequestModel Transport { get; set; }
 

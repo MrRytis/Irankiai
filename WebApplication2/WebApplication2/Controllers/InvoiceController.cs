@@ -30,6 +30,7 @@ namespace WebApplication2.Controllers
                 invoice.Card = newInvoice.Card;
                 invoice.CardOwner = newInvoice.CardOwner;
                 invoice.CVC = newInvoice.CVC;
+                invoice.Amount = newInvoice.Amount;
                 db.SaveChangesAsync();
                 this.Flash("success", "Added!");
                 return RedirectToAction("RentList", "Rent");
