@@ -29,62 +29,73 @@
         <th>
             Invoice status
         </th>
+        <th>
+            Transport invoice status
+        </th>
         <th></th>
     </tr>
     @if (Model != null)
     {
         foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comments)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Invoice.Status)
-                </td>
-                <td>
-                    @if (item.StartDate > DateTime.Now)
-                    {
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Cancel Rent</button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog">
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Invoice.Status)
+        </td>
+        <td>
+            @if (item.InvoiceT != null)
+            { @Html.DisplayFor(modelItem => item.InvoiceT.Status)}
+        </td>
+        <td>
+            @if (item.StartDate > DateTime.Now)
+            {
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Cancel Rent</button>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
 
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Are you sure you want to cancel rent?</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        @Html.ActionLink("Yes", "DeclineRent", new { id = item.Id }, new { @class = "btn btn-default" })
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                    </div>
-                                </div>
-
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Are you sure you want to cancel rent?</h4>
+                            </div>
+                            <div class="modal-body">
+                                @Html.ActionLink("Yes", "DeclineRent", new { id = item.Id }, new { @class = "btn btn-default" })
+                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                             </div>
                         </div>
-                    }
-                    @if (item.Invoice.Status != "Paid")
-                    {
-                        @Html.ActionLink("Pay for rent", "InvoiceForm", "Invoice", new { id = item.Invoice.Id }, new { @class = "btn btn-info" });
-                    }
-                </td>
-            </tr>
+
+                    </div>
+                </div>
+            }
+            @if (item.Invoice.Status != "Paid")
+            {
+                @Html.ActionLink("Pay for rent", "InvoiceForm", "Invoice", new { id = item.Invoice.Id }, new { @class = "btn btn-info" });
+            }
+            @if (item.InvoiceT != null && item.InvoiceT.Status != "Paid")
+            {
+                @Html.ActionLink("Pay for transport", "InvoiceForm", "Invoice", new { id = item.InvoiceT.Id }, new { @class = "btn btn-info" });
+            }
+        </td>
+    </tr>
         }
     }
 

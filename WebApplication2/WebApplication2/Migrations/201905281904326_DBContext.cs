@@ -3,7 +3,7 @@ namespace WebApplication2.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class DBcontext : DbMigration
+    public partial class DBContext : DbMigration
     {
         public override void Up()
         {
@@ -80,14 +80,17 @@ namespace WebApplication2.Migrations
                         Status = c.String(),
                         Comments = c.String(),
                         Invoice_Id = c.Int(),
+                        InvoiceT_Id = c.Int(),
                         Item_Id = c.Int(),
                         Transport_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Invoice", t => t.Invoice_Id)
+                .ForeignKey("dbo.Invoice", t => t.InvoiceT_Id)
                 .ForeignKey("dbo.Item", t => t.Item_Id)
                 .ForeignKey("dbo.Transport", t => t.Transport_Id)
                 .Index(t => t.Invoice_Id)
+                .Index(t => t.InvoiceT_Id)
                 .Index(t => t.Item_Id)
                 .Index(t => t.Transport_Id);
             
@@ -109,9 +112,11 @@ namespace WebApplication2.Migrations
         {
             DropForeignKey("dbo.Rent", "Transport_Id", "dbo.Transport");
             DropForeignKey("dbo.Rent", "Item_Id", "dbo.Item");
+            DropForeignKey("dbo.Rent", "InvoiceT_Id", "dbo.Invoice");
             DropForeignKey("dbo.Rent", "Invoice_Id", "dbo.Invoice");
             DropIndex("dbo.Rent", new[] { "Transport_Id" });
             DropIndex("dbo.Rent", new[] { "Item_Id" });
+            DropIndex("dbo.Rent", new[] { "InvoiceT_Id" });
             DropIndex("dbo.Rent", new[] { "Invoice_Id" });
             DropTable("dbo.Transport");
             DropTable("dbo.Rent");
