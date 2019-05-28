@@ -12,15 +12,17 @@ namespace WebApplication2.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Requerd field.")]
+        [Required(ErrorMessage = "Requered field.")]
         public DateTime StartDate { get; set; }
 
-        [Required(ErrorMessage = "Requerd field.")]
+        [Required(ErrorMessage = "Requered field.")]
         public DateTime EndDate { get; set; }
         public string Status { get; set; }
         public string Comments { get; set; }
         public virtual InvoiceModel Invoice { get; set; }
         public virtual ItemModel Item { get; set; }
         public virtual TransportRequestModel Transport { get; set; }
+
+
     }
 }

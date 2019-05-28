@@ -148,33 +148,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905261040593_InitialCreate.cs" />
-    <Compile Include="Migrations\201905261040593_InitialCreate.Designer.cs">
-      <DependentUpon>201905261040593_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905261331357_DBcontext.cs" />
-    <Compile Include="Migrations\201905261331357_DBcontext.Designer.cs">
-      <DependentUpon>201905261331357_DBcontext.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905261557438_DBcontext1.cs" />
-    <Compile Include="Migrations\201905261557438_DBcontext1.Designer.cs">
-      <DependentUpon>201905261557438_DBcontext1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905261704586_DBcontext2.cs" />
-    <Compile Include="Migrations\201905261704586_DBcontext2.Designer.cs">
-      <DependentUpon>201905261704586_DBcontext2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905261807507_DBcontext3.cs" />
-    <Compile Include="Migrations\201905261807507_DBcontext3.Designer.cs">
-      <DependentUpon>201905261807507_DBcontext3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905271949433_DBcontext4.cs" />
-    <Compile Include="Migrations\201905271949433_DBcontext4.Designer.cs">
-      <DependentUpon>201905271949433_DBcontext4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905271954223_DBcontext5.cs" />
-    <Compile Include="Migrations\201905271954223_DBcontext5.Designer.cs">
-      <DependentUpon>201905271954223_DBcontext5.cs</DependentUpon>
+    <Compile Include="Migrations\201905281238088_DBcontext.cs" />
+    <Compile Include="Migrations\201905281238088_DBcontext.Designer.cs">
+      <DependentUpon>201905281238088_DBcontext.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdvertModel.cs" />
@@ -275,26 +251,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905261040593_InitialCreate.resx">
-      <DependentUpon>201905261040593_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905261331357_DBcontext.resx">
-      <DependentUpon>201905261331357_DBcontext.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905261557438_DBcontext1.resx">
-      <DependentUpon>201905261557438_DBcontext1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905261704586_DBcontext2.resx">
-      <DependentUpon>201905261704586_DBcontext2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905261807507_DBcontext3.resx">
-      <DependentUpon>201905261807507_DBcontext3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905271949433_DBcontext4.resx">
-      <DependentUpon>201905271949433_DBcontext4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905271954223_DBcontext5.resx">
-      <DependentUpon>201905271954223_DBcontext5.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905281238088_DBcontext.resx">
+      <DependentUpon>201905281238088_DBcontext.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

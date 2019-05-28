@@ -16,7 +16,7 @@ namespace WebApplication2.Controllers
 
         public ActionResult ViewTransportRequests()
         {
-            return View(db.TransportRequests.ToList().Where(x => x.Status.Equals("Not approved")));
+            return View(db.TransportRequests.ToList().Where(x => x.Status.Equals("Created")));
         }
     }
 }

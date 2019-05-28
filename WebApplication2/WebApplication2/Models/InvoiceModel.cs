@@ -17,10 +17,10 @@ namespace WebApplication2.Models
         public DateTime Date { get; set; }
         public string Status { get; set; }
 
-        [Required(ErrorMessage = "Requerd field.")]
+        [Required(ErrorMessage = "Requered field.")]
         public Nullable<int> Card { get; set; }
 
-        [Required(ErrorMessage = "Requerd field.")]
+        [Required(ErrorMessage = "Requered field.")]
         public string CardOwner { get; set; }
 
         [Range(99, 999)]

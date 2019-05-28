@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WebApplication2.DAL;
 using WebApplication2.Models;
 using MvcFlashMessages;
+using DataLibrary.DataAccess;
 
 namespace WebApplication2.Controllers
 {
@@ -59,6 +60,12 @@ namespace WebApplication2.Controllers
                     var it = Request["Items"];
                     var item = db.Items.Where(x => x.Name == it).SingleOrDefault();
 
+                    if (item == null)
+                    {
+                        this.Flash("error", "Failed!");
+                        return View();
+                    }
+
                     InvoiceModel invoice = new InvoiceModel();
                     invoice.Status = "Unpaid";
                     invoice.Amount = item.Price * (rent.EndDate - rent.StartDate).TotalDays;
@@ -69,23 +76,48 @@ namespace WebApplication2.Controllers
 
                     var checkBox = Request.Form["checkBox"];
 
+                    string tID = null;
+                    string itID = null;
+                    string inID = null;
+
+                    itID = item.Id.ToString();
+
                     if (checkBox!= null)
                     {
                         TransportRequestModel transport = new TransportRequestModel();
                         transport.Delivery_Time = rent.StartDate;
-                        transport.Pickup_Time = rent.StartDate;
+                        transport.Pickup_Time = rent.EndDate;
                         transport.Status = "Created";
-                        db.TransportRequests.Add(transport);
+                        //db.TransportRequests.Add(transport);
                         rent.Transport = transport;
+
+                        string sql = @"insert into dbo.Transport (Pickup_Time, Delivery_Time, Status, Notes) values (@Pickup_Time, @Delivery_Time, @Status, @Notes);";
+                        tID = (SqlDataAccess.SaveData(sql, transport)).ToString();
                     }
 
                     rent.Status = "In rent";
                     rent.Invoice = invoice;
                     rent.Item = item;
-                    rent.Comments = item.Description;                   
+                    rent.Comments = item.Description;
 
-                    db.Invoices.Add(invoice);
-                    db.Rents.Add(rent);
+                    string sqle = @"insert into dbo.Invoice (Amount, Date, Status, Card, CardOwner, CVC) values (@Amount, @Date, @Status, @Card, @CardOwner, @CVC);";
+                    inID = (SqlDataAccess.SaveData(sqle, invoice)).ToString();
+
+                    if (checkBox != null)
+                    {
+                        sqle = @"insert into dbo.Rent (StartDate, EndDate, Comments, Transport_Id, Item_Id, Invoice_Id) values (@StartDate, @EndDate, @Comments, "+tID+", "+itID+", "+inID+");";
+                        SqlDataAccess.SaveData(sqle, rent);
+                    }
+                    else
+                    {
+                        sqle = @"insert into dbo.Rent (StartDate, EndDate, Comments, Item_Id, Invoice_Id) values (@StartDate, @EndDate, @Comments, "+itID+", "+inID+");";
+                        SqlDataAccess.SaveData(sqle, rent);
+                    }
+                    
+
+                    //db.Invoices.Add(invoice);
+                    //db.Rents.Add(rent);
+
                     db.SaveChanges();
                     this.Flash("success", "Added!");
                     return RedirectToAction("RentList");

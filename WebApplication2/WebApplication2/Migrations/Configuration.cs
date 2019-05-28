@@ -10,7 +10,6 @@ namespace WebApplication2.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WebApplication2.DAL.DBcontext";
         }
 
         protected override void Seed(WebApplication2.DAL.DBcontext context)
